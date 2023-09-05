@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+        .box {
+            display: grid;
+            align-content: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .header {
+            height: 15%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .clock {
+            height: 10%;
+            font-size: 36px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .header-small {
+            height: 10%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .input {
+            height: 40%;
+            font-size: 62px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="box header">
+            <h2>Station 5</h2>
+            <p>Robot Camp Observation Challenge</p>
+            <p>Hint: You may work together with other teams on this one.</p>
+        </div>
+        <div class="box clock">
+            <span id="clock"></span>
+        </div>
+        <div style="height:70%;">
+            <div style="width:50%;float:left;">
+                <div class="box header-small">
+                    <p>Sample Input</p>
+                </div>
+                <div class="box input" id="sampleInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Sample Output</p>
+                </div>
+                <div class="box input" id="sampleOutput">
+                    <p>?</p>
+                </div>
+            </div>
+            <div style="width:50%;float:right;">
+                <div class="box header-small">
+                    <p>Input</p>
+                </div>
+                <div class="box input" id="realInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Output</p>
+                </div>
+                <div class="box input">
+                    <p>?</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var clock = document.getElementById('clock');
+            var sampleInput = document.getElementById('sampleInput');
+            var sampleOutput = document.getElementById('sampleOutput');
+            var realInput = document.getElementById('realInput');
+            var sampleInputs = ['Sally', 'Isis', 'Kelt', 'Sari', 'Atlas', 'Caio', 'Ella', 'Damaris', 'Raven ', 'Isis', 'Sari', 'Mate', 'Isis', 'Sari', 'Caio', 'Maja', 'Sari', 'Sanne', 'Hugo ', 'Isis', 'Andrey', 'Felix', 'Sofia', 'Carine', 'Luca', 'Sofia', 'Damaris', 'Damaris', 'Ioanna', 'Sanne', 'Hugo ', 'Atlas', 'Maja', 'Yuyue', 'Kian Baig', 'Eryk', 'Hugo ', 'Sally', 'Ioanna', 'Eryk', 'Felix', 'Rosa', 'Jesper', 'Kelt', 'Damaris', 'Jesper', 'Celia', 'Kelt', 'Sally', 'Kian Baig', 'Kian Baig', 'Sari', 'Kelt', 'Luca', 'Caio', 'Sanne', 'Elisa', 'Atlas', 'Elisa', 'Kian Baig', 'Yuyue', 'Sally', 'Eryk', 'Felix', 'Ioanna', 'Andrey', 'Jesper', 'Isis', 'Quanpu', 'Kelt', 'Sari', 'Luca', 'Ella', 'Quanpu', 'Caio', 'Angeline', 'Karolina', 'Paulina', 'Kelt', 'Jesper', 'Eryk', 'Kelt', 'Sanne', 'Ella', 'Angeline', 'Sari', 'Yuyue', 'Mate', 'Damaris', 'Rosa', 'Celia', 'Sally', 'Andrey', 'Raven ', 'Rosa', 'Kian Baig', 'Yuyue', 'Maja', 'Yuyue', 'Ioanna', 'Isis', 'Atlas', 'Felix', 'Maja', 'Kelt', 'Sally', 'Celia', 'Raven ', 'Paulina', 'Luca', 'Ella', 'Kelt', 'Mate', 'Elisa', 'Karolina', 'Ioanna', 'Quanpu', 'Sally', 'Sanne', 'Carine', 'Eliana', 'Maja', 'Andrey', 'Maja', 'Isis', 'Sofia', 'Isis', 'Karolina', 'Ella', 'Hugo ', 'Quanpu', 'Rosa', 'Ella', 'Luca', 'Damaris', 'Mate', 'Damaris', 'Eliana', 'Eliana', 'Celia', 'Paulina', 'Eryk', 'Kelt', 'Ella', 'Raven ', 'Sari', 'Maja', 'Atlas', 'Sari', 'Quanpu', 'Yuyue', 'Caio', 'Raven ', 'Maja', 'Celia', 'Sari', 'Sofia', 'Sanne', 'Jesper', 'Sari', 'Damaris', 'Sally', 'Jesper', 'Karolina', 'Ioanna', 'Damaris', 'Jesper', 'Caio', 'Sari', 'Carine', 'Luca', 'Eryk', 'Paulina', 'Andrey', 'Hugo ', 'Elisa', 'Celia', 'Raven ', 'Raven ', 'Paulina', 'Atlas', 'Caio', 'Yuyue', 'Celia', 'Angeline', 'Sofia', 'Ioanna', 'Jesper', 'Elisa', 'Raven ', 'Raven ', 'Kelt', 'Jesper', 'Karolina', 'Raven ', 'Ioanna', 'Eryk', 'Rosa', 'Yuyue', 'Hugo ', 'Yuyue', 'Karolina', 'Ioanna', 'Elisa', 'Mate', 'Sari', 'Angeline', 'Rosa', 'Kian Baig', 'Yuyue', 'Kelt', 'Andrey', 'Paulina', 'Raven ', 'Luca', 'Yuyue', 'Eryk', 'Atlas', 'Carine', 'Quanpu', 'Yuyue', 'Eryk', 'Maja', 'Eliana', 'Rosa', 'Sanne', 'Mate', 'Ioanna', 'Carine', 'Luca', 'Damaris', 'Elisa', 'Sanne', 'Caio', 'Jesper', 'Celia', 'Ella', 'Jesper', 'Sanne', 'Sally', 'Angeline', 'Sanne', 'Maja', 'Karolina', 'Sari', 'Atlas', 'Jesper', 'Angeline', 'Caio', 'Quanpu', 'Quanpu', 'Eliana', 'Damaris', 'Paulina', 'Yuyue', 'Yuyue', 'Damaris', 'Sari', 'Kelt', 'Karolina', 'Ella', 'Ella', 'Kian Baig', 'Carine', 'Hugo ', 'Felix', 'Sanne', 'Yuyue', 'Caio', 'Isis', 'Hugo ', 'Quanpu', 'Caio', 'Luca', 'Carine', 'Celia', 'Celia', 'Eryk', 'Kelt', 'Sanne', 'Atlas', 'Sari', 'Sally', 'Kelt', 'Mate', 'Karolina', 'Ioanna', 'Damaris', 'Raven ', 'Kelt', 'Isis', 'Eliana', 'Sally', 'Kelt', 'Atlas', 'Eryk', 'Raven ', 'Isis', 'Damaris', 'Ella', 'Karolina', 'Maja', 'Hugo ', 'Sanne', 'Carine', 'Celia', 'Quanpu', 'Ella', 'Andrey', 'Ioanna', 'Ella', 'Sari', 'Jesper', 'Celia', 'Andrey', 'Ella', 'Angeline', 'Sally', 'Carine', 'Karolina', 'Ioanna', 'Yuyue', 'Hugo ', 'Ella', 'Isis', 'Atlas', 'Sofia', 'Karolina', 'Andrey', 'Ioanna', 'Hugo ', 'Kelt', 'Andrey', 'Celia', 'Ella', 'Ioanna', 'Sari', 'Hugo ', 'Paulina', 'Quanpu', 'Andrey', 'Jesper', 'Isis', 'Elisa', 'Sofia', 'Ioanna', 'Luca', 'Kelt', 'Sally', 'Angeline', 'Yuyue', 'Maja', 'Luca', 'Celia', 'Yuyue', 'Elisa', 'Luca', 'Kelt', 'Celia', 'Raven '];
+            var sampleOutputs = [8, 1, 4, 3, 9, 8, 11, 1, 6, 1, 3, 7, 1, 3, 8, 1, 3, 8, 10, 1, 10, 9, 4, 2, 12, 4, 1, 1, 11, 8, 10, 9, 1, 12, 5, 7, 10, 8, 11, 7, 9, 1, 3, 4, 1, 3, 2, 4, 8, 5, 5, 3, 4, 12, 8, 8, 3, 9, 3, 5, 12, 8, 7, 9, 11, 10, 3, 1, 4, 4, 3, 12, 11, 4, 8, 6, 12, 6, 4, 3, 7, 4, 8, 11, 6, 3, 12, 7, 1, 1, 2, 8, 10, 6, 1, 5, 12, 1, 12, 11, 1, 9, 9, 1, 4, 8, 2, 6, 6, 12, 11, 4, 7, 3, 12, 11, 4, 8, 8, 2, 9, 1, 10, 1, 1, 4, 1, 12, 11, 10, 4, 1, 11, 12, 1, 7, 1, 9, 9, 2, 6, 7, 4, 11, 6, 3, 1, 9, 3, 4, 12, 8, 6, 1, 2, 3, 4, 8, 3, 3, 1, 8, 3, 12, 11, 1, 3, 8, 3, 2, 12, 7, 6, 10, 10, 3, 2, 6, 6, 6, 9, 8, 12, 2, 6, 4, 11, 3, 3, 6, 6, 4, 3, 12, 6, 11, 7, 1, 12, 10, 12, 12, 11, 3, 7, 3, 6, 1, 5, 12, 4, 10, 6, 6, 12, 12, 7, 9, 2, 4, 12, 7, 1, 9, 1, 8, 7, 11, 2, 12, 1, 3, 8, 8, 3, 2, 11, 3, 8, 8, 6, 8, 1, 12, 3, 9, 3, 6, 8, 4, 4, 9, 1, 6, 12, 12, 1, 3, 4, 12, 11, 11, 5, 2, 10, 9, 8, 12, 8, 1, 10, 4, 8, 12, 2, 2, 2, 7, 4, 8, 9, 3, 8, 4, 7, 12, 11, 1, 6, 4, 1, 9, 8, 4, 9, 7, 6, 1, 1, 11, 12, 1, 10, 8, 2, 2, 4, 11, 10, 11, 11, 3, 3, 2, 10, 11, 6, 8, 2, 12, 11, 12, 10, 11, 1, 9, 4, 12, 10, 11, 10, 4, 10, 2, 11, 11, 3, 10, 6, 4, 10, 3, 1, 3, 4, 11, 12, 4, 8, 6, 12, 1, 12, 2, 12, 3, 12, 4, 2, 6];
+            var realInputs = ['Yash', 'Ruben', 'Beatris', 'Martyna', 'Gonzalo', 'Emma', 'Kavin', 'Diana', 'Mika', 'Rachna', 'Vincent', 'Yash', 'Charlie', 'Hielke', 'Gonzalo', 'Maria', 'Hielke', 'Sahir', 'Ruben', 'Vanessa', 'Yash', 'Ruben', 'Ruben', 'Matas', 'Matas', 'Ruben', 'Gur', 'Caleb', 'Alexia', 'Hielke', 'Cristian', 'Alyssa', 'Ruben', 'Vincent', 'Mika', 'Sebastian', 'Caleb', 'Emma', 'Hielke', 'Angelica', 'Caleb', 'Martyna', 'Angelica', 'Cristian', 'Akanksha', 'Dmitry', 'Maria', 'Martyna', 'Alyssa', 'Sahir', 'Al-fatihi', 'Charlie', 'Hielke', 'Martyna', 'Martyna', 'Mika', 'Kavin', 'Angelica', 'Vanessa', 'Maria', 'Matas', 'Alyssa', 'Martyna', 'Diana', 'Martyna', 'Kavin', 'Hielke', 'Mika', 'Charlie', 'Charlie', 'Gur', 'Caleb', 'Dmitry', 'Alexia', 'Vincent', 'Maja', 'Kavin', 'Vanessa', 'Angelica', 'Akanksha', 'Hielke', 'Jelle', 'Beatris', 'Alexia', 'Cristian', 'Beatris', 'Yash', 'Martyna', 'Al-fatihi', 'Vincent', 'Cristian', 'Charlie', 'Angelica', 'Sebastian', 'Kavin', 'Alyssa', 'Charlie', 'Vincent', 'Alyssa', 'Sebastian', 'Maria', 'Sebastian', 'Sebastian', 'Ruben', 'Vincent', 'Sabrina', 'Kavin', 'Diana', 'Diana', 'Maja', 'Matas', 'Vincent', 'Matas', 'Martyna', 'Caleb', 'Rachna', 'Beatris', 'Diana', 'Vanessa', 'Charlie', 'Gonzalo', 'Mika', 'Sahir', 'Charlie', 'Vanessa', 'Alexia', 'Matas', 'Charlie', 'Vincent', 'Beatris', 'Martyna', 'Martyna', 'Caleb', 'Mika', 'Sahir', 'Diana', 'Matas', 'Dmitry', 'Angelica', 'Gur', 'Alyssa', 'Mika', 'Matas', 'Emma', 'Mika', 'Alyssa', 'Sabrina', 'Angelica', 'Maja', 'Gonzalo', 'Martyna', 'Sahir', 'Charlie', 'Gonzalo', 'Charlie', 'Al-fatihi', 'Kavin', 'Maria', 'Mika', 'Vincent', 'Jelle', 'Sahir', 'Hielke', 'Akanksha', 'Hielke', 'Charlie', 'Alexia', 'Martyna', 'Mika', 'Sabrina', 'Gur', 'Hielke', 'Emma', 'Martyna', 'Diana', 'Charlie', 'Dmitry', 'Beatris', 'Charlie', 'Gur', 'Al-fatihi', 'Alexia', 'Gur', 'Mika', 'Ruben', 'Hielke', 'Alexia', 'Matas', 'Yash', 'Maria', 'Diana', 'Alyssa', 'Gur', 'Charlie', 'Vanessa', 'Beatris', 'Gur', 'Jelle', 'Akanksha', 'Sahir', 'Caleb', 'Gonzalo', 'Martyna', 'Sahir', 'Vanessa', 'Al-fatihi', 'Gur', 'Alexia', 'Alyssa', 'Al-fatihi', 'Diana', 'Caleb', 'Yash', 'Alexia', 'Sebastian', 'Al-fatihi', 'Vincent', 'Angelica', 'Caleb', 'Yash', 'Sebastian', 'Vanessa', 'Al-fatihi', 'Maria', 'Cristian', 'Kavin', 'Angelica', 'Beatris', 'Gonzalo', 'Mika', 'Vanessa', 'Dmitry', 'Martyna', 'Akanksha', 'Sahir', 'Cristian', 'Diana', 'Sebastian', 'Mika', 'Alexia', 'Maria', 'Yash', 'Martyna', 'Charlie', 'Diana', 'Hielke', 'Martyna', 'Akanksha', 'Maria', 'Martyna', 'Diana', 'Ruben', 'Beatris', 'Angelica', 'Vincent', 'Caleb', 'Charlie', 'Sahir', 'Diana', 'Sebastian', 'Kavin', 'Gur', 'Dmitry', 'Gur', 'Vincent', 'Charlie', 'Dmitry', 'Martyna', 'Martyna', 'Yash', 'Jelle', 'Vincent', 'Sebastian', 'Gur', 'Martyna', 'Kavin', 'Dmitry', 'Mika', 'Vincent', 'Sebastian', 'Jelle', 'Emma', 'Diana', 'Gur', 'Vanessa', 'Martyna', 'Cristian', 'Emma', 'Angelica', 'Caleb', 'Dmitry', 'Maja', 'Alexia', 'Angelica', 'Al-fatihi', 'Matas', 'Maria', 'Alyssa', 'Maja', 'Sabrina', 'Emma', 'Ruben', 'Jelle', 'Gur', 'Charlie', 'Beatris', 'Akanksha', 'Martyna', 'Vincent', 'Caleb', 'Caleb', 'Vanessa', 'Jelle', 'Ruben', 'Alyssa', 'Beatris', 'Yash', 'Alexia', 'Martyna', 'Martyna', 'Hielke', 'Sabrina', 'Dmitry', 'Maria', 'Mika', 'Caleb', 'Beatris', 'Ruben', 'Kavin', 'Diana', 'Diana', 'Angelica', 'Diana', 'Rachna', 'Akanksha', 'Alyssa', 'Hielke', 'Rachna', 'Caleb', 'Vincent', 'Hielke', 'Rachna', 'Al-fatihi', 'Maria', 'Dmitry', 'Ruben', 'Charlie', 'Emma', 'Sebastian', 'Gur', 'Diana', 'Diana', 'Alexia', 'Martyna', 'Martyna', 'Maria', 'Maja', 'Caleb', 'Ruben', 'Kavin'];
+            function update() {
+                var d = new Date();
+                var s = d.getSeconds();
+                var m = d.getMinutes();
+                var h = d.getHours();
+                clock.textContent = ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+                var i = Math.floor((m*60+s)/10)
+                sampleInput.textContent = sampleInputs[i%sampleInputs.length]
+                sampleOutput.textContent = sampleOutputs[i%sampleOutputs.length]
+                realInput.textContent = realInputs[i%realInputs.length]
+            }
+            setInterval(update, 1000);
+        </script>
+    </body>
+</html> 

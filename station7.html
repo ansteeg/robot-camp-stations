@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+        .box {
+            display: grid;
+            align-content: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .header {
+            height: 15%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .clock {
+            height: 10%;
+            font-size: 36px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .header-small {
+            height: 10%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .input {
+            height: 40%;
+            font-size: 62px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="box header">
+            <h2>Station 7</h2>
+            <p>Robot Camp Observation Challenge</p>
+            <p>Hint: eval()</p>
+        </div>
+        <div class="box clock">
+            <span id="clock"></span>
+        </div>
+        <div style="height:70%;">
+            <div style="width:50%;float:left;">
+                <div class="box header-small">
+                    <p>Sample Input</p>
+                </div>
+                <div class="box input" id="sampleInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Sample Output</p>
+                </div>
+                <div class="box input" id="sampleOutput">
+                    <p>?</p>
+                </div>
+            </div>
+            <div style="width:50%;float:right;">
+                <div class="box header-small">
+                    <p>Input</p>
+                </div>
+                <div class="box input" id="realInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Output</p>
+                </div>
+                <div class="box input">
+                    <p>?</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var clock = document.getElementById('clock');
+            var sampleInput = document.getElementById('sampleInput');
+            var sampleOutput = document.getElementById('sampleOutput');
+            var realInput = document.getElementById('realInput');
+            var sampleInputs = ['a+d+b+c', 'e+d+a+b', 'e+b', 'e*b*d*a', 'd*c', 'b*a', 'd+c', 'e*a*d', 'd+c', 'e*b+a+d', 'b+e', 'd*b*c', 'c+b', 'b+e*c+d', 'b+d', 'c+b*a', 'd*e+b+a', 'e*d*b+a', 'd+a+b+e', 'a*e*d*b', 'a*d+c*b', 'a*c+e', 'e+b*a', 'e+c*a+d', 'b+c+a', 'd+b+e*a', 'e*b+d', 'd*e*a', 'b+d', 'e+b', 'a+c', 'a*b', 'b*e+d+c', 'd*b', 'a*d', 'd*a+b', 'c+b+a', 'd+e+b*a', 'd+a', 'e+a+b*d', 'b*a+d', 'd*e', 'd*b+c', 'a+d', 'a*c', 'e+b', 'e+b', 'a+b+d', 'e*c+d*a', 'd+c*b', 'a*b', 'e+c', 'c+b', 'c+e*d', 'e+c+a*b', 'e+c', 'e+c+d', 'c*d+a*e', 'a*c', 'c+e*d+a', 'b+d', 'e+d+a*c', 'c+b', 'a*e+b+c', 'a+d*e', 'b*c+d+e', 'b*d', 'b+a+d', 'c+d*e', 'd*a+c+e', 'a*d', 'c*a*e+d', 'd+b', 'd+c*e', 'c*e', 'd*b+c', 'd+c*e+b', 'b*d*c', 'b*c+d', 'e*a+d*b', 'b+a', 'd+e', 'e+d*b', 'b+a', 'b+e+d', 'a*c', 'e*d*c', 'b*e*a', 'c*b*d+e', 'c*d', 'a+c+d+b', 'd*c', 'd*a+c*b', 'd*a*c*e', 'e+d+b*c', 'd*e', 'b*c+d+a', 'd+e+a*c', 'b*d*c', 'd*a*b', 'e+c+d+a', 'b+a', 'b+c*e+a', 'c*b+a', 'a+d*c', 'b+c+e*a', 'a*e*b*c', 'd+e*c', 'b*c*e', 'd*e*b+a', 'd+e*b', 'd*b', 'b*d*c', 'c+b+a*e', 'b*e*a+d', 'd+c', 'e*d*b*c', 'd*c*a+b', 'a+c+e', 'c*a+d', 'c+d', 'e+c', 'a*c', 'd+a*c*e', 'b+d*a', 'd*a', 'a+c*b+d', 'd+e*b*c', 'e+a+d', 'c+b', 'b+c', 'd*e', 'a+d*e', 'a+d+c', 'e+b', 'b+a+d', 'e*d+b*c', 'e*d+c', 'd*c', 'a+b', 'c+b*e*d', 'e*d', 'd*e', 'c+b*d', 'd*e+b+c', 'c+e+d', 'd*a+e*c', 'd+b*e+c', 'd+a+e', 'c+e', 'b+e', 'b*d', 'c*e*a*b', 'b+a*d', 'e*a*d', 'e*b*d', 'c*e*b', 'b*c', 'a*e*c', 'b*a+e*c', 'a*b+d', 'b+e*c*a', 'e*c*d', 'e+b', 'c+a*b+e', 'c+a', 'a*d*c', 'b*c', 'b+e', 'b*c+d*e', 'a*d+b', 'c*e*b', 'b*e+a', 'e*c*a', 'd*a+e*c', 'e*b', 'b*c+e+d', 'a*c+d', 'd+b+e', 'e*b*c', 'c+e+a', 'd*a', 'a*b*d', 'c*d+e+b', 'e*b', 'a*d*b+c', 'c*a', 'b+e', 'c*b*e', 'd*c', 'c+e', 'b*a*e', 'c+e*a+d', 'b+a', 'b+c+e', 'e+b', 'b+d+a', 'c+a+b+e', 'e*a', 'c+b', 'd+a*c*b', 'e+a*c', 'a+e*c+d', 'd+a*e+b', 'c*e', 'e*d*a+b', 'd+e*b', 'd+c*b', 'c*b*a+d', 'd+c', 'e+c', 'a*d*e+c', 'c*a+b*d', 'c*a', 'e+d+c', 'c+b*e*d', 'a+c*b', 'a+c', 'd*c+b', 'c+a+b', 'a+d*e*c', 'd*c+e+b', 'a*e*b', 'd+a', 'c+b', 'c*a+d', 'd+b*e+c', 'd+e', 'd+c', 'd*e*a*b', 'b*d+c', 'b*e', 'a*d*b*c', 'e+b', 'c+b+a', 'b+c+a', 'd*e*c*a', 'a*e*c', 'a*b*d*c', 'c*a', 'a*e+c+d', 'd+a*b*c', 'b+c*d+e', 'c*e*d', 'a*b*c*e', 'e+c+d', 'b*d*a+e', 'd*b+e*c', 'c*b', 'c*b', 'b+a', 'a+d+e', 'b+c+e', 'a*d+c', 'c*b+d*a', 'e*d*b', 'e*b+d+c', 'd*a', 'e+c+a*d', 'b*a+d*c', 'a*d+c', 'c+a', 'a*c+b', 'd+e*c', 'a+d', 'b*a', 'b*a+c', 'e*a+c', 'e+b+c*a', 'c+e+d+b', 'e+d', 'a*d*e', 'c+d', 'a*c', 'c*b', 'd*b+a*c', 'b+c+d', 'e*d*a', 'b*d+e*c', 'c*e', 'd*c+b*e', 'c+e+b+d', 'a+d*c', 'e*b*c', 'a*e*d', 'a*d', 'b+c*a+d', 'c*e', 'a+e*c*b', 'b*e*d*a', 'a+e', 'd+c*e*a', 'c*b+a+e', 'd+c', 'c+d*a+e', 'b+c+a*d', 'e*d+c', 'a*e', 'd*e+a*b', 'd*b+a', 'e+a+c', 'b*c', 'e*a*b', 'e*b*d+a', 'e+b*d+a', 'a*c', 'd+e*c*b', 'd*e', 'a+e', 'd*b*e', 'c*d', 'b*a*c', 'a*e+b', 'a*e', 'd+b*e*a', 'd*e', 'd+a*e', 'b+d+a', 'd*c+a', 'b*d*c', 'd+b', 'e*a*d', 'e*a+b', 'c*d+a', 'e*a+b+d', 'e*b+c', 'c+e*d*b', 'e*d+b*a', 'e*a*c', 'e+a*b*c', 'b+a+c*e', 'b*c*e', 'd+b+e*c', 'd*b*e*c', 'c*b+d*a', 'c+e*b', 'e*c+d', 'e*d*a*b', 'a*e*d', 'b+d*a', 'e+b', 'e+b', 'a*d', 'd+b+e+c', 'd*b*c*a', 'e+a', 'd+a', 'd+c+a', 'e+c*b', 'e*b*c+a', 'b*d+a', 'c*b+e*d', 'c+e+a+d', 'b+d*a', 'c*d+b', 'c+a+d*b', 'e*a*c', 'b+c*a*e', 'e*b+d', 'a*d+e+b'];
+            var sampleOutputs = [13.0, 9.5, -0.5, -10.5, 28.0, -3.0, 11.0, 10.5, 11.0, 9.5, -0.5, -28.0, 3.0, 8.0, 6.0, 1.0, 5.5, -0.5, 9.5, -10.5, 17.0, 12.5, -2.5, 19.5, 6.0, 7.5, 6.5, 10.5, 6.0, -0.5, 7.0, -3.0, 10.5, -7.0, 21.0, 20.0, 6.0, 4.5, 10.0, -3.5, 4.0, 3.5, -3.0, 10.0, 12.0, -0.5, -0.5, 9.0, 23.0, 3.0, -3.0, 4.5, 3.0, 7.5, 1.5, 4.5, 11.5, 29.5, 12.0, 10.5, 6.0, 19.5, 3.0, 4.5, 6.5, 3.5, -7.0, 9.0, 7.5, 25.5, 21.0, 13.0, 6.0, 9.0, 2.0, -3.0, 8.0, -28.0, 3.0, -5.5, 2.0, 7.5, -6.5, 2.0, 6.5, 12.0, 14.0, -1.5, -27.5, 28.0, 13.0, 28.0, 17.0, 42.0, 3.5, 3.5, 6.0, 19.5, -28.0, -21.0, 14.5, 2.0, 4.0, -1.0, 31.0, 4.5, -6.0, 9.0, -2.0, -0.5, 6.5, -7.0, -28.0, 4.5, 5.5, 11.0, -14.0, 83.0, 7.5, 19.0, 11.0, 4.5, 12.0, 13.0, 20.0, 21.0, 6.0, 5.0, 10.5, 3.0, 3.0, 3.5, 6.5, 14.0, -0.5, 9.0, -0.5, 7.5, 28.0, 2.0, 0.5, 3.5, 3.5, -3.0, 6.5, 11.5, 23.0, 10.5, 10.5, 4.5, -0.5, -7.0, -6.0, 20.0, 10.5, -3.5, -2.0, -4.0, 6.0, -1.0, 4.0, 5.0, 14.0, -0.5, 1.5, 7.0, 84.0, -4.0, -0.5, -0.5, 20.0, -2.0, 2.5, 6.0, 23.0, -0.5, 3.5, 19.0, 6.5, -2.0, 7.5, 21.0, -21.0, 27.5, -0.5, -17.0, 12.0, -0.5, -2.0, 28.0, 4.5, -1.5, 12.5, 2.0, 3.5, -0.5, 9.0, 6.5, 1.5, 3.0, -5.0, 12.5, 12.0, 7.5, 2.0, 9.5, 6.5, 3.0, -5.0, 11.0, 4.5, 14.5, 5.0, 12.0, 11.5, 0.5, -1.0, 7.0, 27.0, 6.0, 17.0, 27.5, -1.5, 10.0, 3.0, 19.0, 10.5, 7.5, 11.0, -10.5, -3.0, -0.5, -84.0, -0.5, 6.0, 6.0, 42.0, 6.0, -84.0, 12.0, 12.5, -5.0, 27.5, 14.0, -6.0, 11.5, -20.5, -5.0, -4.0, -4.0, 2.0, 10.5, 3.5, 25.0, 17.0, -3.5, 10.5, 21.0, 25.5, 25.0, 25.0, 7.0, 11.0, 9.0, 10.0, -3.0, 1.0, 5.5, 11.5, 10.5, 7.5, 10.5, 11.0, 12.0, -4.0, 5.0, 10.0, 10.5, -5.0, 2.0, 27.5, 10.5, 31.0, -2.0, 10.5, 21.0, 18.0, 2.0, 1.0, -10.5, 3.5, 13.0, -0.5, 11.0, 25.5, 24.0, 7.5, 1.5, 0.5, -4.0, 7.5, -4.0, -1.5, -0.5, -3.5, 12.0, 5.0, 3.5, 3.5, -3.5, 28.0, -12.0, 0.5, 1.5, 5.5, 3.5, 8.5, 9.0, 31.0, -28.0, 6.0, 10.5, 0.5, 31.0, 7.5, 3.5, 0.5, 0.5, 6.0, -11.5, 4.0, -2.0, 8.0, -14.0, 17.0, 3.5, 9.0, -10.5, 10.5, 20.0, -0.5, -0.5, 21.0, 10.5, -84.0, 3.5, 10.0, 14.0, -3.5, 1.0, -4.0, -0.5, 14.5, 20.0, 27.0, 0.0, 6.0, 5.0, 6.5, 20.5];
+            var realInputs = ['e+b+c*a', 'b*a*c*d', 'd*a*e*b', 'c+b+a', 'c+a+d', 'c*b', 'd*e', 'd*a+e', 'a+e+d', 'a+d', 'e*d+a', 'c+d+e', 'a*b', 'b+a', 'a*b+e+d', 'b+a+e', 'b*d+c', 'e+d', 'c+b*e', 'a*e*d', 'd+c*a', 'd+b*e+c', 'e*d', 'e+d+b+c', 'a*d+e+b', 'd+a+e', 'e+d+b*a', 'b+e', 'e+d', 'e*c', 'd*c*b', 'd*a*c+e', 'd+b+a', 'e*c+a', 'b*c*e', 'c*e*b+d', 'b*c', 'a+b+c*d', 'b+c+a*e', 'e*d', 'a*b', 'e*c', 'e*b', 'a+c', 'e*c', 'd+c*b', 'b+d+e+a', 'd*e+c', 'b+e', 'c+a+b', 'e*c+a*b', 'c+b', 'b*a*c+e', 'e*d+c+b', 'a*c', 'c*d', 'c*e', 'c*e', 'e*a', 'c+a+d+e', 'b*d*a+c', 'd*c+a', 'b*e', 'e*a+b*c', 'e*d+b*c', 'e+b', 'd+b*c*e', 'a+e', 'd*e+b', 'b*c*a', 'c+e', 'e*c*b', 'e+c*d', 'b*d+c*e', 'd+c*b*e', 'e+b', 'e+d+b*a', 'd+c+b', 'b*e+c*d', 'e*a*d+b', 'c+a', 'd*e+a+c', 'e+d', 'd*b*a', 'a*e+b', 'b*d*c+e', 'd+e*b', 'c+a', 'c+b', 'b+c*e*d', 'd+b', 'd*a+c*e', 'b+d', 'a+c*d+e', 'c*d', 'd*a*c*b', 'c+b*a+e', 'b*c', 'd*b*c+e', 'e+b*c+a', 'd+c+b', 'b*e', 'd*e*a', 'e+b', 'a*c*b', 'e*a+c', 'c+e+b+a', 'a*d*b', 'a+c*e', 'd+b+a+e', 'c+d*b*a', 'd+c', 'b+c+e*a', 'd*b*e*c', 'a+e*d', 'd*c+e', 'd*a', 'd+e+b*c', 'c+e*d', 'a+e', 'a+e', 'a*c+e', 'b*a*d', 'c+a', 'c+e+d', 'a+e', 'b+e', 'a*b', 'b*a+d', 'a+d', 'c+e+d', 'b+a+d*c', 'b*e+a+c', 'e*c', 'c+b*e', 'b*a', 'c+b*d+a', 'd+b*e', 'a+d*b*e', 'e+d+a', 'a+d+b+e', 'c*e*a+d', 'c+b', 'e*d', 'a*e+b+c', 'a*b*e', 'b+a+e+c', 'c*b*a', 'c+a*d*b', 'e+d*c', 'a*c*b', 'a+c+b', 'b+e', 'd+b+e', 'd+c+b*e', 'e*a', 'a+c+d+e', 'c*a*b', 'b*d+c', 'e*b+a', 'd+b', 'c+d+e*b', 'b+e', 'a+d+b', 'e*c', 'a+c*b', 'e+d+a*c', 'd*c*b', 'a+c', 'a+b+d*e', 'a*c*d', 'c+a+e', 'e+b*a', 'b*e', 'a*d+b*e', 'e+a*b+c', 'a+c', 'd*a', 'e*a+b+d', 'a*b', 'd+b', 'd*e+b*a', 'b+d*c', 'a+d', 'd*a+c', 'b*c+e', 'a*d*e*c', 'e*d*a+c', 'b+d+c*a', 'a+c', 'e+b*c', 'b+d', 'c+d+e+b', 'c+e+a+b', 'b+e+c+a', 'b*a+c', 'b+d+c*a', 'c*b+e', 'd*b*a', 'e+d*c*a', 'a*b', 'e*b', 'e+d+b+a', 'c+a*d', 'c+b', 'a*d+e+b', 'd*b*c', 'c*a*e', 'b+e+a*c', 'c+a*b', 'b+a*e', 'd+e+c*a', 'a*c', 'd*c', 'b+a*e', 'd+a*b*c', 'e*b+a', 'b*a', 'a*e*c', 'c+e+b*d', 'd+c', 'd*b*e', 'b+a', 'c*b+d*e', 'b*d+c+a', 'd+b', 'b+a', 'a*c+e', 'c+a*e', 'e*c*a', 'e*a*b+c', 'e+c', 'c*d*e*b', 'b*e', 'e*a', 'c+a*d', 'a*d*c', 'a+c*e', 'c*e+a', 'b*e*a', 'b+d*a+c', 'b+c', 'd+c', 'b*d*e*a', 'a+d*e*b', 'e*c+b', 'a*b*c+d', 'b+d', 'd+a*b+c', 'c*d', 'd*e*a', 'c*a+e', 'c*d+b+e', 'c*d*a', 'e+a', 'd*b+e*c', 'd*e+c', 'e+c+d*b', 'c+b*a*d', 'c+d+a*b', 'c*d*b*e', 'd+a', 'b+e*c', 'b+c', 'd*b*e', 'a*d', 'b*a+d*c', 'e+d', 'b*e', 'd*e+a', 'b*a*e+c', 'a+c*d+b', 'e*b+a', 'c*d*e', 'c*d', 'b*a', 'b+c', 'a+b*e+d', 'c+a+e+b', 'a*e*b*d', 'b+a*d+e', 'e+d+c+b', 'a*c', 'b*c*e*d', 'a*c', 'd*b+a+c', 'd+a+e+c', 'b*d*c+a', 'a*d', 'c*a+b+d', 'b*d*e*a', 'c+a*d', 'c*e*d', 'a+b', 'a*e', 'd+e*c+a', 'd+e*a', 'c*a', 'e+c+b+d', 'd+a+e', 'e*d', 'a*d', 'c*a', 'b*e+a*d', 'd+e*b+c', 'a+e*b+c', 'e*b*c*a', 'd*e', 'c*a+e+b', 'c*d+a', 'd+e', 'c+b', 'd+e', 'c+e', 'e+d', 'e+d+c', 'a*e+d+b', 'd*e', 'e+c*b', 'd+b*e', 'e*c+a+d', 'c+b*e+d', 'd*c*a+b', 'b+a+d', 'c*b', 'c+a', 'd+b*a', 'c+e*b*a', 'c+e', 'c+b', 'd+a+b', 'e+d+b*c', 'b*a', 'd+a+c', 'a*e*b*c', 'e+b', 'e*a*b', 'c*d', 'b*a+e', 'd+b+e', 'd+e*c', 'c+d*b+e', 'b*a+c+d', 'b*a', 'e*a', 'b+e*a+c', 'b*a', 'b*e*c*d', 'a*b+e', 'e+a+c+d', 'c+d*b*a', 'b+c*e', 'b*d+e', 'b+a+e*c', 'b*c*e', 'b+c+e*a', 'b+e', 'e+c+b+a', 'e*c*a+b', 'e+b*c'];
+            function update() {
+                var d = new Date();
+                var s = d.getSeconds();
+                var m = d.getMinutes();
+                var h = d.getHours();
+                clock.textContent = ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+                var i = Math.floor((m*60+s)/10)
+                sampleInput.textContent = sampleInputs[i%sampleInputs.length]
+                sampleOutput.textContent = sampleOutputs[i%sampleOutputs.length]
+                realInput.textContent = realInputs[i%realInputs.length]
+            }
+            setInterval(update, 1000);
+        </script>
+    </body>
+</html> 

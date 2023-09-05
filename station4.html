@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+        .box {
+            display: grid;
+            align-content: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .header {
+            height: 15%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .clock {
+            height: 10%;
+            font-size: 36px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .header-small {
+            height: 10%;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        .input {
+            height: 40%;
+            font-size: 62px;
+            border: 5px outset blue;
+            background-color: lightblue;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="box header">
+            <h2>Station 4</h2>
+            <p>Robot Camp Observation Challenge</p>
+            <p></p>
+        </div>
+        <div class="box clock">
+            <span id="clock"></span>
+        </div>
+        <div style="height:70%;">
+            <div style="width:50%;float:left;">
+                <div class="box header-small">
+                    <p>Sample Input</p>
+                </div>
+                <div class="box input" id="sampleInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Sample Output</p>
+                </div>
+                <div class="box input" id="sampleOutput">
+                    <p>?</p>
+                </div>
+            </div>
+            <div style="width:50%;float:right;">
+                <div class="box header-small">
+                    <p>Input</p>
+                </div>
+                <div class="box input" id="realInput">
+                    <p>?</p>
+                </div>
+                <div class="box header-small">
+                    <p>Output</p>
+                </div>
+                <div class="box input">
+                    <p>?</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var clock = document.getElementById('clock');
+            var sampleInput = document.getElementById('sampleInput');
+            var sampleOutput = document.getElementById('sampleOutput');
+            var realInput = document.getElementById('realInput');
+            var sampleInputs = [63, 2, 27, 22, 73, 67, 89, 8, 42, 2, 21, 50, 2, 19, 64, 54, 22, 58, 80, 0, 80, 69, 34, 15, 95, 33, 9, 9, 84, 60, 80, 72, 53, 97, 37, 55, 82, 61, 86, 57, 70, 4, 22, 28, 7, 23, 10, 27, 63, 36, 37, 20, 26, 93, 64, 60, 17, 72, 16, 37, 98, 63, 55, 68, 84, 77, 22, 3, 31, 26, 21, 94, 87, 31, 65, 39, 91, 45, 26, 24, 56, 26, 58, 89, 39, 21, 99, 50, 9, 4, 10, 62, 79, 42, 6, 38, 99, 52, 97, 86, 1, 72, 68, 53, 26, 64, 11, 43, 45, 95, 87, 26, 50, 17, 91, 87, 29, 63, 60, 15, 76, 53, 77, 53, 0, 32, 1, 92, 87, 83, 30, 5, 87, 94, 8, 48, 6, 76, 76, 12, 47, 54, 26, 87, 42, 21, 53, 72, 20, 31, 99, 64, 43, 51, 12, 22, 33, 58, 23, 22, 7, 63, 22, 90, 85, 7, 23, 66, 21, 13, 93, 57, 47, 78, 80, 19, 9, 43, 42, 46, 72, 67, 98, 9, 40, 33, 86, 24, 19, 44, 42, 27, 24, 92, 44, 86, 55, 5, 99, 83, 96, 92, 84, 16, 48, 21, 40, 5, 37, 98, 26, 78, 45, 42, 95, 99, 55, 71, 15, 29, 96, 57, 54, 74, 5, 58, 50, 85, 15, 96, 8, 18, 59, 67, 23, 11, 89, 24, 59, 61, 41, 58, 52, 93, 20, 71, 23, 39, 67, 29, 31, 75, 7, 45, 99, 99, 7, 21, 26, 93, 88, 87, 36, 15, 83, 70, 61, 98, 65, 0, 81, 29, 66, 93, 13, 11, 10, 55, 27, 60, 71, 20, 63, 26, 48, 90, 84, 9, 42, 27, 0, 77, 63, 26, 74, 55, 42, 0, 7, 88, 90, 54, 83, 58, 14, 12, 30, 89, 79, 86, 89, 21, 24, 10, 78, 88, 40, 62, 15, 92, 86, 97, 81, 88, 2, 73, 33, 93, 80, 86, 81, 26, 78, 10, 87, 85, 22, 81, 46, 30, 79, 22, 2, 19, 32, 86, 96, 27, 64, 39, 98, 53, 93, 11, 97, 17, 96, 26, 10, 43];
+            var sampleOutputs = ["False", "True", "False", "False", "True", "True", "True", "False", "False", "True", "False", "False", "True", "True", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "True", "True", "True", "False", "False", "True", "False", "False", "False", "False", "False", "False", "True", "True", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "True", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "True", "True", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "True", "False", "False", "False", "False", "True", "False", "False", "True", "True", "False", "False", "False", "False", "False", "True", "False", "False", "True", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "True", "False", "False", "True", "False", "False", "True", "False", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "True", "True", "False", "False", "True", "False", "False", "True", "False", "False", "True", "False", "True", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "False", "False", "False", "True", "True", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "True", "True", "True", "True", "True", "False", "True", "True", "True", "False", "False", "False", "False", "True", "True", "False", "True", "True", "True", "False", "True", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "True", "False", "True", "False", "False", "False", "False", "True", "False", "False", "True", "True", "False", "False", "False", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "False", "False", "True", "False", "False", "False", "False", "True", "True", "False", "True", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "False", "True", "True", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "False", "True", "False", "True", "True", "False", "False", "False", "False", "False", "False", "False", "True", "False", "True", "True", "True", "False", "False", "False", "True"];
+            var realInputs = [7556, 3823, 6455, 5602, 4466, 6189, 3292, 7379, 1015, 9330, 5846, 7474, 7677, 7035, 4277, 1629, 6978, 3971, 3825, 8632, 7477, 3702, 3783, 4675, 4621, 3660, 2145, 4784, 9463, 7095, 9125, 6539, 3708, 5931, 1003, 3582, 4868, 6219, 6892, 5184, 4979, 2923, 5258, 9110, 8164, 2527, 1763, 5639, 6696, 4016, 8365, 7760, 7055, 3021, 2792, 1219, 3203, 5276, 8647, 1655, 4729, 6667, 2749, 7267, 5449, 3195, 6904, 1049, 7758, 7930, 1959, 4826, 2582, 9621, 5661, 1451, 3242, 8635, 5108, 8212, 7008, 9891, 6359, 9550, 9022, 6513, 7473, 5543, 8475, 5930, 9074, 7692, 5272, 3332, 3225, 6738, 7892, 5691, 6640, 3471, 1697, 3571, 3445, 3877, 5861, 2245, 3081, 7245, 7357, 1578, 4668, 5883, 4741, 2861, 4781, 9143, 6256, 7259, 8710, 7890, 4423, 1053, 4165, 7781, 8681, 9580, 4771, 7727, 5915, 6429, 2984, 2974, 4922, 1261, 4025, 7112, 4638, 2485, 5206, 2148, 6600, 1242, 4546, 6079, 1243, 6784, 2221, 5155, 1452, 4411, 2904, 3941, 7851, 4412, 7768, 8487, 3270, 1737, 1174, 5854, 9999, 4149, 6851, 8031, 6865, 7788, 9546, 2794, 1183, 2371, 2135, 7025, 6075, 2961, 7295, 7902, 2510, 6465, 7731, 2030, 8373, 9682, 1972, 1231, 3807, 7096, 9623, 4569, 7435, 1683, 7215, 6645, 1917, 7952, 8652, 6403, 2089, 9854, 8043, 4124, 4855, 4335, 5553, 4071, 8646, 8400, 1949, 9647, 6720, 8458, 7365, 4919, 7604, 9689, 3430, 8273, 5843, 5351, 4920, 7579, 3415, 8665, 8476, 1779, 8934, 3194, 5182, 6492, 4410, 1258, 8658, 2636, 2909, 8180, 4063, 8922, 7310, 3486, 1091, 9532, 1770, 7480, 5397, 7823, 7215, 6813, 5417, 8136, 1837, 2994, 7226, 3755, 6234, 5259, 5778, 4829, 7713, 3977, 7325, 3438, 3262, 2085, 2733, 2075, 5822, 7859, 2666, 2947, 5357, 7521, 9789, 5721, 3546, 1904, 2747, 3047, 2614, 1127, 5807, 3468, 9768, 5980, 7276, 2136, 8816, 5417, 8854, 6166, 5224, 4964, 2659, 1462, 9469, 5299, 8399, 4606, 1666, 6665, 1482, 2342, 6065, 3734, 9945, 2066, 7879, 6456, 8116, 3031, 5703, 5054, 4984, 8741, 9910, 3748, 6589, 6486, 7660, 9528, 2870, 2899, 6943, 2413, 2564, 1675, 1024, 5054, 6344, 3621, 3083, 7362, 7326, 5086, 7186, 9315, 8090, 6625, 6950, 9403, 4826, 5901, 6828, 9175, 8439, 1642, 2493, 3768, 7740, 6122, 3597, 2119, 7198, 7297, 9484, 5504, 5444, 1723, 1358, 4888, 3900, 3253];
+            function update() {
+                var d = new Date();
+                var s = d.getSeconds();
+                var m = d.getMinutes();
+                var h = d.getHours();
+                clock.textContent = ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+                var i = Math.floor((m*60+s)/10)
+                sampleInput.textContent = sampleInputs[i%sampleInputs.length]
+                sampleOutput.textContent = sampleOutputs[i%sampleOutputs.length]
+                realInput.textContent = realInputs[i%realInputs.length]
+            }
+            setInterval(update, 1000);
+        </script>
+    </body>
+</html> 
